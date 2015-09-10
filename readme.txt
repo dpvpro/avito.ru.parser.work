@@ -29,14 +29,10 @@ lxml, requests, scrapy - ок.
 
 Переименовал корневую папку и создал git репозитарий
 Пояснение, почему много файлов parser1 - parser6: проект начинался без git, и это своеобразная система версий.
-parser1.py - пример работаюшего парсера. Видео пособие - https://www.youtube.com/watch?v=KPXPr-KS-qk. Название - Python 3. Практика. Пишем парсер web-caйта. Код - https://gist.github.com/mr-linch/ea6803f8df5d3805464a
-
+parser1.py - пример работаюшего парсера. Видео пособие - https://www.youtube.com/watch?v=KPXPr-KS-qk. Название - Python 3. Практика. Пишем парсер web-caйта. Код - https://gist.github.com/mr-linch/ea6803f8df5d3805464a.
+Скрпит написан на python 2.7. Такое было техническое задание.
 ----------------------------------------------------------
 
-Install dependency
-
-sudo apt-get install python3-pip
-sudo pip3 install beautifulsoup4
 
 
 Монтируем удаленную папку
