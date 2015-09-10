@@ -5,13 +5,11 @@ import csv
 # для python 2.7 - urllib2
 import urllib2
 import requests
-import pdb
 
 from bs4 import BeautifulSoup
 
 
 BASE_URL = 'https://www.avito.ru/sankt-peterburg/rabota'
-# BASE_URL = 'https://www.avito.ru/sankt-peterburg/rabota?p='
 
 
 def get_html(url):
@@ -31,26 +29,17 @@ def parse(html):
     soup = BeautifulSoup(html, 'html.parser')
     work_item = soup.find('div', class_='js-catalog_after-ads')
     
-    # print work_item
-    # description = work_item.find_all('h3')
 
-    # ".encode('utf-8')" нужен для правильной интерпретации unicode
     
     description = work_item.find_all('div', class_='description')
-
-    # print description[0].div.text.encode('utf-8')
 
     data = []
     for item in description:
 
-    #   cols = row.find_all('td')
         data.append({
             'title': item.a.text.strip(),
             'price': item.find('div', class_='about').text.strip()[:-5],
             'type': item.find('div', class_='data').p.text.strip(),
-    #         'categories': [category.text for category in cols[0].find_all('noindex')],
-    #         'price': cols[1].text.strip().split()[0],
-    #         'application': cols[2].text.split()[0]
         })
     # print data
     return data
@@ -62,25 +51,22 @@ def save(projects, path):
         writer.writerow(('Вакансия', 'Зарплата', 'Тип'))
 
         writer.writerows(
-            # (project['title'].encode('utf-8'),) for project in projects
+            # ".encode('utf-8')" нужен для правильной интерпретации unicode
             (project['title'].encode('utf-8'),
              project['price'].encode('utf-8'),
              project['type'].encode('utf-8'),
             ) for project in projects
-            # (project['title'], ', '.join(project['categories']), project['price'], project['application']) for project in projects
         )
 
 
 def main():
 
     total_pages_words = get_page_count(get_html(BASE_URL))
-    # print total_pages_words
 
     print('Всего найдено %d страниц...' % total_pages_words)
 
     projects = []
 
-    #for page in range(251, 300):
     for page in range(1, total_pages_words + 1):
         print('Парсинг %d%% (%d/%d)' % (int(float(page) / float(total_pages_words) * 100), page, total_pages_words))
         projects.extend(parse(get_html(BASE_URL + "?p=%d" % page)))
@@ -88,6 +74,7 @@ def main():
     print('Сохранение...')
     save(projects, 'projects_all.csv')
 
+    # печать для теста
     # for item in projects:
     #     print item['title'].encode('utf-8'),
     #     print item['price'].encode('utf-8'),
