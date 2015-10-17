@@ -39,10 +39,10 @@ parser1.py - пример рабочего парсера.
 
 Монтируем удаленную папку
 
-sshfs -p ... dp@....:/home/dp/project/ ~/Sport.cap.ru
+sshfs -p ... user@....:/home/user/project/ ~/Folder
 
 Размонтируем удаленную папку
 
-fusermount -u ~/Sport.cap.ru
+fusermount -u ~/Folder
 ----------------------------------------------------------
 
