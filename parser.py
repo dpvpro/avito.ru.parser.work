@@ -21,7 +21,7 @@ def get_html(url):
 def get_page_count(html):
     # 'html.parser' для совместмости с debian 8. без этого на debian не работает. на ubuntu нормально.
     soup = BeautifulSoup(html, 'html.parser')
-    paggination = soup.find('div', class_='pagination__pages clearfix')
+    paggination = soup.find('div', class_='pagination-pages clearfix')
     # основаная строка для парсинга количества страниц
     return int(paggination.find_all('a', href=True)[-1]['href'][-3:])
 
