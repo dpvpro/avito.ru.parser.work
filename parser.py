@@ -67,13 +67,14 @@ def main():
     print('Всего найдено %d страниц...' % total_pages_words)
 
     projects = []
-
-    for page in range(1, total_pages_words + 1):
-        print('Парсинг %d%% (%d/%d)' % (int(float(page) / float(total_pages_words) * 100), page, total_pages_words))
-        projects.extend(parse(get_html(BASE_URL + "?p=%d" % page)))
-	sleep(10)
-    print('Сохранение...')
-    save(projects, 'projects_all.csv')
+    try:
+        for page in range(1, total_pages_words + 1):
+            print('Парсинг %d%% (%d/%d)' % (int(float(page) / float(total_pages_words) * 100), page, total_pages_words))
+            projects.extend(parse(get_html(BASE_URL + "?p=%d" % page)))
+	    sleep(10)
+    finally:    
+        print('Сохранение...')
+        save(projects, 'projects_all.csv')
 
     # печать для теста
     # for item in projects:
