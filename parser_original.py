@@ -62,7 +62,7 @@ def main():
         projects.extend(parse(get_html(BASE_URL + "page=%d" % page)))
 
     print('Сохранение...')
-    save(projects, 'projects.csv')
+    save(projects, 'projects_default.csv')
 
 
 if __name__ == '__main__':
